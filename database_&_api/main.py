@@ -4,8 +4,18 @@ from config.database import engine
 
 from routes.auth import router as auth_router
 
+from routes.profile import router as profile_router
+
+from routes.preference import router as preference_router
+
+
 app = FastAPI(title="Hostel Matcher API")
 app.include_router(auth_router)
+
+app.include_router(profile_router)
+
+app.include_router(preference_router)
+
 
 @app.get("/")
 def home():

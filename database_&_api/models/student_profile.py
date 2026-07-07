@@ -35,6 +35,14 @@ class StudentProfile(Base):
         cascade="all, delete"
     )
 
+
+    preference = relationship(
+    "Preference",
+    back_populates="profile",
+    uselist=False,
+    cascade="all, delete"
+)
+
     # Relationship with hobbies
     hobbies = relationship(
     "StudentHobby",
