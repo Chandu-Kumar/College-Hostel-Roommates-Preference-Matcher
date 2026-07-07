@@ -8,6 +8,8 @@ from routes.profile import router as profile_router
 
 from routes.preference import router as preference_router
 
+from routes.hobby import router as hobby_router
+
 
 app = FastAPI(title="Hostel Matcher API")
 app.include_router(auth_router)
@@ -15,6 +17,8 @@ app.include_router(auth_router)
 app.include_router(profile_router)
 
 app.include_router(preference_router)
+
+app.include_router(hobby_router)
 
 
 @app.get("/")
