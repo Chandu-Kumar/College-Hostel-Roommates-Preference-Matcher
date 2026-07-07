@@ -1,40 +1,38 @@
-try:
-    from fastapi import FastAPI  # type: ignore
-except Exception:
-    # Minimal fallback when fastapi isn't installed (useful for linting/IDE warnings)
-    class FastAPI:
-        def __init__(self, **kwargs):
-            self._routes = {}
+from fastapi import FastAPI
+from sqlalchemy import text
+from config.database import engine
 
-        def get(self, path):
-            def decorator(func):
-                self._routes[path] = func
-                return func
-            return decorator
-
-        def __call__(self, scope, receive, send):
-            async def app(scope, receive, send):
-                if scope.get("type") != "http":
-                    await send({"type": "http.response.start", "status": 500, "headers": []})
-                    await send({"type": "http.response.body", "body": b"Unsupported scope"})
-                    return
-                path = scope.get("path", "/")
-                handler = self._routes.get(path)
-                if not handler:
-                    await send({"type": "http.response.start", "status": 404, "headers": []})
-                    await send({"type": "http.response.body", "body": b"Not Found"})
-                    return
-                result = handler()
-                body = (str(result)).encode()
-                await send({"type": "http.response.start", "status": 200, "headers": [(b"content-type", b"application/json")]})
-                await send({"type": "http.response.body", "body": body})
-
-            return app(scope, receive, send)
-
+from routes.auth import router as auth_router
 
 app = FastAPI(title="Hostel Matcher API")
-
+app.include_router(auth_router)
 
 @app.get("/")
 def home():
     return {"message": "Hostel Matcher Backend Running 🚀"}
+
+@app.get("/tables")
+def get_tables():
+    with engine.connect() as conn:
+        result = conn.execute(text("SHOW TABLES"))
+        return {"tables": [row[0] for row in result]}
+    
+
+from models.user import User
+from models.student_profile import StudentProfile
+from models.preference import Preference
+from models.hobby import Hobby
+from models.student_hobby import StudentHobby
+from models.room_request import RoomRequest
+
+
+@app.get("/check-models")
+def check_models():
+    return {
+        "User": User.__tablename__,
+        "StudentProfile": StudentProfile.__tablename__,
+        "Preference": Preference.__tablename__,
+        "Hobby": Hobby.__tablename__,
+        "StudentHobby": StudentHobby.__tablename__,
+        "RoomRequest": RoomRequest.__tablename__,
+    }
