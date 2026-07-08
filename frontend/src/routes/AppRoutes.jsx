@@ -5,6 +5,8 @@ import Dashboard from "../pages/Dashboard";
 
 import ProtectedRoute from "./ProtectedRoute";
 
+import Profile from "../pages/Profile";
+
 function AppRoutes() {
     return (
         <Routes>
@@ -19,6 +21,15 @@ function AppRoutes() {
                 element={
                     <ProtectedRoute>
                         <Dashboard />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/profile"
+                element={
+                    <ProtectedRoute>
+                        <Profile />
                     </ProtectedRoute>
                 }
             />
