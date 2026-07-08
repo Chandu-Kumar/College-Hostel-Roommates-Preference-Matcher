@@ -49,3 +49,4 @@ class StudentProfile(Base):
     back_populates="profile",
     cascade="all, delete"
 )
+

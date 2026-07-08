@@ -65,3 +65,5 @@ CREATE TABLE IF NOT EXISTS room_requests (
     FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+

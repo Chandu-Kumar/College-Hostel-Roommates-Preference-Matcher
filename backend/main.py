@@ -14,10 +14,24 @@ from routes.matching import router as matching_router
 
 from routes.room_request import router as room_request_router
 
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 
 
 
 app = FastAPI(title="Hostel Matcher API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 app.include_router(auth_router)
 
 app.include_router(profile_router)
