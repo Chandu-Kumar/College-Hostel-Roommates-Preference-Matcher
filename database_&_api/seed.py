@@ -208,6 +208,43 @@ def seed_preferences(db):
     print("✅ Preferences Seeded")
 
 
+def seed_student_hobbies(db):
+
+    profiles = db.query(StudentProfile).all()
+    hobbies = db.query(Hobby).all()
+
+    for profile in profiles:
+
+        # Agar hobbies already assign hain to skip
+        existing = (
+            db.query(StudentHobby)
+            .filter(StudentHobby.profile_id == profile.user_id)
+            .count()
+        )
+
+        if existing > 0:
+            continue
+
+        # Random 3-5 hobbies
+        selected_hobbies = random.sample(
+            hobbies,
+            random.randint(3, 5)
+        )
+
+        for hobby in selected_hobbies:
+
+            mapping = StudentHobby(
+                profile_id=profile.user_id,
+                hobby_id=hobby.id
+            )
+
+            db.add(mapping)
+
+    db.commit()
+
+    print("✅ Student Hobbies Seeded")
+
+
 
 
 
@@ -220,6 +257,7 @@ seed_hobbies(db)
 seed_users(db)
 seed_profiles(db)
 seed_preferences(db)
+seed_student_hobbies(db)
 
 
 db.close()
