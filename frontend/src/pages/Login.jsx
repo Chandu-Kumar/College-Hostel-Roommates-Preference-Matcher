@@ -3,10 +3,13 @@ import api from "../api/api";
 
 import { useNavigate } from "react-router-dom";
 
+import { useAuth } from "../context/AuthContext";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +26,7 @@ function Login() {
         },
       });
 
-      localStorage.setItem("token", response.data.access_token);
+      login(response.data.access_token);
 
       navigate("/dashboard");
     } catch (error) {
