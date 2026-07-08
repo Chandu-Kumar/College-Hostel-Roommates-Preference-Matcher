@@ -12,6 +12,8 @@ from routes.hobby import router as hobby_router
 
 from routes.matching import router as matching_router
 
+from routes.room_request import router as room_request_router
+
 
 
 
@@ -25,6 +27,8 @@ app.include_router(preference_router)
 app.include_router(hobby_router)
 
 app.include_router(matching_router)
+
+app.include_router(room_request_router)
 
 
 @app.get("/")
