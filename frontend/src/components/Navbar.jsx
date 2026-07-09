@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
 
-    // const { logout } = useAuth();
+    const { user, logout } = useAuth();
 
     const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ function Navbar() {
         navigate("/");
     };
 
-    const { user, logout } = useAuth();
+    
 
     return (
 
@@ -50,6 +50,8 @@ function Navbar() {
                     <Link to="/preferences">Preferences</Link>
 
                     <Link to="/room-requests">Requests</Link>
+
+                    <Link to="/hobbies" className="hover:text-blue-400">Hobbies</Link>
 
                     <button
                         onClick={handleLogout}

@@ -91,6 +91,15 @@ def delete_student_hobbies(
 
     db.commit()
 
+def get_all_hobbies(db: Session):
+    return (
+        db.query(Hobby)
+        .order_by(Hobby.hobby_name)
+        .all()
+    )
+
+
+
 
 
 

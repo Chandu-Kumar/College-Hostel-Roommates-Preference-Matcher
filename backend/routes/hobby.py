@@ -8,6 +8,7 @@ from models.user import User
 
 from crud.hobby import get_hobby_names
 
+from crud.hobby import get_all_hobbies
 
 from schemas.hobby import (
     HobbyCreate,
@@ -66,6 +67,18 @@ def create_user_hobbies(
     return {
         "hobbies": saved_hobbies
     }
+
+@router.get("")
+def get_all_hobbies_list(
+    db: Session = Depends(get_db)
+    ):
+
+    hobbies = get_all_hobbies(db)
+
+    return [
+        hobby.hobby_name
+        for hobby in hobbies
+    ]
 
 
 @router.get("/me", response_model=HobbyResponse)

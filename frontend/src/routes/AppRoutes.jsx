@@ -9,6 +9,10 @@ import Profile from "../pages/Profile";
 
 import Preferences from "../pages/Preferences";
 
+import Hobbies from "../pages/Hobbies";
+
+// const Hobbies = () => <h1>Hobbies Page</h1>;
+
 function AppRoutes() {
     return (
         <Routes>
@@ -41,6 +45,15 @@ function AppRoutes() {
                 element={
                     <ProtectedRoute>
                         <Preferences />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/hobbies"
+                element={
+                    <ProtectedRoute>
+                    <Hobbies />
                     </ProtectedRoute>
                 }
             />
