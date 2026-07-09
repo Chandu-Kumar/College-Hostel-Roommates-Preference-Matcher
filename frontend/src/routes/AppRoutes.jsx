@@ -7,6 +7,8 @@ import ProtectedRoute from "./ProtectedRoute";
 
 import Profile from "../pages/Profile";
 
+import Preferences from "../pages/Preferences";
+
 function AppRoutes() {
     return (
         <Routes>
@@ -30,6 +32,15 @@ function AppRoutes() {
                 element={
                     <ProtectedRoute>
                         <Profile />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/preferences"
+                element={
+                    <ProtectedRoute>
+                        <Preferences />
                     </ProtectedRoute>
                 }
             />
