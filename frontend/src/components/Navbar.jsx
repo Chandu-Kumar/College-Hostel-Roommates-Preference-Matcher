@@ -1,6 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-
 
 function Navbar() {
 
@@ -8,54 +7,110 @@ function Navbar() {
 
     const navigate = useNavigate();
 
-    
-
     const handleLogout = () => {
 
         logout();
 
         navigate("/");
+
     };
 
-    
+    const navClass = ({ isActive }) =>
+        `px-3 py-2 rounded-lg transition ${
+            isActive
+                ? "bg-blue-600 text-white"
+                : "text-gray-300 hover:text-white hover:bg-slate-800"
+        }`;
 
     return (
 
-        <nav className="bg-slate-900 text-white shadow-lg">
+        <nav className="bg-slate-900 shadow-lg sticky top-0 z-50">
 
             <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-                <div className="flex items-center gap-6">
+                {/* Logo */}
 
-                    <h1 className="text-2xl font-bold text-blue-400">
+                <div className="flex items-center gap-8">
+
+                    <div>
+
+                        <h1 className="text-2xl font-bold text-blue-400">
                             🏠 Hostel Matcher
-                    </h1>
+                        </h1>
 
-                    {user && (
-                        <span className="text-gray-300">
-                            Welcome, {user.name} 👋
-                        </span>
-                    )}
+                        <p className="text-xs text-gray-400">
+                            Find Your Ideal Roommate
+                        </p>
+
+                    </div>
+
+                    <div className="hidden lg:flex gap-2">
+
+                        <NavLink
+                            to="/dashboard"
+                            className={navClass}
+                        >
+                            🏠 Dashboard
+                        </NavLink>
+
+                        <NavLink
+                            to="/profile"
+                            className={navClass}
+                        >
+                            👤 Profile
+                        </NavLink>
+
+                        <NavLink
+                            to="/preferences"
+                            className={navClass}
+                        >
+                            🛏 Preferences
+                        </NavLink>
+
+                        <NavLink
+                            to="/hobbies"
+                            className={navClass}
+                        >
+                            🎯 Hobbies
+                        </NavLink>
+
+                        <NavLink
+                            to="/matches"
+                            className={navClass}
+                        >
+                            ❤️ Matches
+                        </NavLink>
+
+                        <NavLink
+                            to="/room-requests"
+                            className={navClass}
+                        >
+                            📨 Requests
+                        </NavLink>
+
+                    </div>
 
                 </div>
 
-                <div className="flex gap-6 items-center">
+                {/* Right Side */}
 
-                    <Link to="/dashboard">Dashboard</Link>
+                <div className="flex items-center gap-4">
 
-                    <Link to="/matches">Matches</Link>
+                    <div className="hidden md:block text-right">
 
-                    <Link to="/profile">Profile</Link>
+                        <p className="text-sm text-gray-400">
+                            Welcome
+                        </p>
 
-                    <Link to="/preferences">Preferences</Link>
+                        <p className="text-white font-semibold">
+                            {user?.name}
+                        </p>
 
-                    <Link to="/room-requests">Requests</Link>
-
-                    <Link to="/hobbies" className="hover:text-blue-400">Hobbies</Link>
+                    </div>
 
                     <button
                         onClick={handleLogout}
-                        className="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition"
                     >
                         Logout
                     </button>
@@ -67,6 +122,7 @@ function Navbar() {
         </nav>
 
     );
+
 }
 
 export default Navbar;

@@ -17,6 +17,8 @@ import Matches from "../pages/Matches";
 
 import RoomRequests from "../pages/RoomRequests";
 
+import Register from "../pages/Register";
+
 function AppRoutes() {
     return (
         <Routes>
@@ -78,6 +80,11 @@ function AppRoutes() {
                         <RoomRequests />
                     </ProtectedRoute>
                 }
+            />
+
+            <Route
+                path="/register"
+                element={<Register />}
             />
 
         </Routes>
