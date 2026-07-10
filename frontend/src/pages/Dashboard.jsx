@@ -24,7 +24,7 @@ function Dashboard() {
 
                 <p className="mt-3 text-blue-100 text-lg">
 
-                    Complete your profile and discover your ideal hostel roommate.
+                    Manage your profile, discover compatible roommates, and send room requests — all in one place.
 
                 </p>
 
@@ -61,17 +61,17 @@ function Dashboard() {
                 <StatCard
                     icon="❤️"
                     title="Matches"
-                    status="Coming Soon"
-                    color="text-orange-500"
+                    status="Available ✅"
+                    color="text-green-600"
+                    to="/matches"
                 />
-
                 <StatCard
                     icon="📨"
                     title="Requests"
-                    status="Coming Soon"
-                    color="text-orange-500"
+                    status="Available ✅"
+                    color="text-green-600"
+                    to="/room-requests"
                 />
-
             </div>
 
             {/* Quick Actions */}
@@ -107,11 +107,19 @@ function Dashboard() {
                         🎯 Hobbies
                     </Link>
 
-                    <button
-                        className="bg-gray-500 text-white px-6 py-3 rounded-xl cursor-not-allowed opacity-70"
+                    <Link
+                        to="/matches"
+                        className="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition"
                     >
-                        ❤️ Matches (Coming Soon)
-                    </button>
+                        ❤️ View Matches
+                    </Link>
+
+                    <Link
+                        to="/room-requests"
+                        className="bg-orange-600 text-white px-6 py-3 rounded-xl hover:bg-orange-700 transition"
+                    >
+                        📨 Room Requests
+                    </Link>
 
                 </div>
 
