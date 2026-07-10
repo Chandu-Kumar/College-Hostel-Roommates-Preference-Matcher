@@ -21,7 +21,6 @@ router = APIRouter(
     tags=["Room Requests"]
 )
 
-
 @router.post("/{receiver_id}", response_model=RoomRequestResponse)
 def send_room_request(
     receiver_id: int,
@@ -57,7 +56,6 @@ def send_room_request(
 
     return request
 
-
 @router.get("/sent", response_model=list[RoomRequestResponse])
 def sent_requests(
     db: Session = Depends(get_db),
@@ -69,7 +67,6 @@ def sent_requests(
         current_user.id
     )
 
-
 @router.get("/received", response_model=list[RoomRequestResponse])
 def received_requests(
     db: Session = Depends(get_db),
@@ -80,7 +77,6 @@ def received_requests(
         db,
         current_user.id
     )
-
 
 @router.put("/{request_id}/accept", response_model=RoomRequestResponse)
 def accept_request(
@@ -112,8 +108,6 @@ def accept_request(
         "accepted"
     )
 
-
-
 @router.put("/{request_id}/reject", response_model=RoomRequestResponse)
 def reject_request(
     request_id: int,
@@ -143,8 +137,6 @@ def reject_request(
         request,
         "rejected"
     )
-
-
 
 
 

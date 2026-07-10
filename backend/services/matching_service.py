@@ -78,12 +78,13 @@ def find_matches(
             my_hobbies,
             hobbies
         )
-
         matches.append({
             "user_id": user.id,
             "name": user.name,
+            "department": user.profile.department if user.profile else "",
             "match_score": score
         })
+        
 
     matches.sort(
         key=lambda x: x["match_score"],

@@ -13,6 +13,10 @@ import Hobbies from "../pages/Hobbies";
 
 // const Hobbies = () => <h1>Hobbies Page</h1>;
 
+import Matches from "../pages/Matches";
+
+import RoomRequests from "../pages/RoomRequests";
+
 function AppRoutes() {
     return (
         <Routes>
@@ -54,6 +58,24 @@ function AppRoutes() {
                 element={
                     <ProtectedRoute>
                     <Hobbies />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/matches"
+                element={
+                    <ProtectedRoute>
+                        <Matches />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/room-requests"
+                element={
+                    <ProtectedRoute>
+                        <RoomRequests />
                     </ProtectedRoute>
                 }
             />

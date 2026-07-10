@@ -21,7 +21,6 @@ def create_room_request(
 
     return request
 
-
 def get_existing_request(
     db: Session,
     sender_id: int,
@@ -37,7 +36,6 @@ def get_existing_request(
         .first()
     )
 
-
 def get_sent_requests(
     db: Session,
     sender_id: int
@@ -47,7 +45,6 @@ def get_sent_requests(
         .filter(RoomRequest.sender_id == sender_id)
         .all()
     )
-
 
 def get_received_requests(
     db: Session,
@@ -69,7 +66,6 @@ def get_request_by_id(
         .first()
     )
 
-
 def update_request_status(
     db: Session,
     request: RoomRequest,
@@ -81,9 +77,6 @@ def update_request_status(
     db.refresh(request)
 
     return request
-
-
-
 
 
 
