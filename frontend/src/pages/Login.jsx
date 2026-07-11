@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api";
 import { useAuth } from "../context/AuthContext";
 
+import { toast } from "sonner";
+
 function Login() {
 
     const [email, setEmail] = useState("");
@@ -46,7 +48,9 @@ function Login() {
 
         } catch {
 
-            alert("Invalid Email or Password");
+            
+
+            toast.error("Invalid Email or Password",{duration: 4000});
 
         } finally {
 

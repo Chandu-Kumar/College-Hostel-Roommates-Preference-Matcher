@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 
 import { useEffect, useState } from "react";
 
+import { toast } from "sonner";
+
 // import { createProfile } from "../services/profileService";
 
 // import { useEffect } from "react";
@@ -68,7 +70,9 @@ function Profile() {
 
             console.log(response);
 
-            alert("Profile Updated Successfully ✅");
+            // console.log("toast line reached");
+
+            toast.success("Profile Updated Successfully");
 
         } else {
 
@@ -76,7 +80,9 @@ function Profile() {
 
             console.log(response);
 
-            alert("Profile Created Successfully ✅");
+            console.log("toast line reached");
+
+            toast.success("Profile Created Successfully");
 
             setProfileExists(true);
 
@@ -86,73 +92,186 @@ function Profile() {
 
         console.error(error);
 
-        alert("Something went wrong ❌");
+        toast.error("Something went wrong ❌");
 
     }
 
 };
 
-    return (
+   return (
 
         <MainLayout>
 
-            <h1 className="text-3xl font-bold mb-6">
-                My Profile
-            </h1>
+            {/* Hero */}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-3xl p-8 shadow-xl">
 
-                <input
-                    type="number"
-                    placeholder="Age"
-                    {...register("age", {
-                        required: "Age is required"
-                    })}
-                    className="w-full border rounded-lg p-3"
-                />
+                <h1 className="text-4xl font-bold">
 
-                <select
-                    {...register("gender")}
-                    className="w-full border rounded-lg p-3"
+                    👤 Student Profile
+
+                </h1>
+
+                <p className="mt-3 text-blue-100">
+
+                    Keep your personal information updated to improve roommate matching.
+
+                </p>
+
+            </div>
+
+            {/* Form Card */}
+
+            <div className="bg-white rounded-3xl shadow-xl p-10 mt-8">
+
+                <h2 className="text-2xl font-bold mb-8">
+
+                    Personal Information
+
+                </h2>
+
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="grid md:grid-cols-2 gap-6"
                 >
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                </select>
 
-                <input
-                    placeholder="Department"
-                    {...register("department")}
-                    className="w-full border rounded-lg p-3"
-                />
+                    {/* Age */}
 
-                <input
-                    type="number"
-                    placeholder="Year"
-                    {...register("year")}
-                    className="w-full border rounded-lg p-3"
-                />
+                    <div>
 
-                <input
-                    placeholder="Hostel"
-                    {...register("hostel")}
-                    className="w-full border rounded-lg p-3"
-                />
+                        <label className="block font-semibold mb-2">
 
-                <input
-                    placeholder="Phone"
-                    {...register("phone")}
-                    className="w-full border rounded-lg p-3"
-                />
+                            🎂 Age
 
-                <button
-                    type="submit"
-                    className="bg-blue-600 text-white px-6 py-3 rounded-lg"
-                >
-                    Save Profile
-                </button>
+                        </label>
 
-            </form>
+                        <input
+                            type="number"
+                            placeholder="Enter your age"
+                            {...register("age", {
+                                required: "Age is required"
+                            })}
+                            className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                        />
+
+                    </div>
+
+                    {/* Gender */}
+
+                    <div>
+
+                        <label className="block font-semibold mb-2">
+
+                            👥 Gender
+
+                        </label>
+
+                        <select
+                            {...register("gender")}
+                            className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                        >
+
+                            <option>Male</option>
+
+                            <option>Female</option>
+
+                            <option>Other</option>
+
+                        </select>
+
+                    </div>
+
+                    {/* Department */}
+
+                    <div>
+
+                        <label className="block font-semibold mb-2">
+
+                            🎓 Department
+
+                        </label>
+
+                        <input
+                            placeholder="Computer Science"
+                            {...register("department")}
+                            className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                        />
+
+                    </div>
+
+                    {/* Year */}
+
+                    <div>
+
+                        <label className="block font-semibold mb-2">
+
+                            📚 Academic Year
+
+                        </label>
+
+                        <input
+                            type="number"
+                            placeholder="Enter Year"
+                            {...register("year")}
+                            className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                        />
+
+                    </div>
+
+                    {/* Hostel */}
+
+                    <div>
+
+                        <label className="block font-semibold mb-2">
+
+                            🏠 Hostel
+
+                        </label>
+
+                        <input
+                            placeholder="Hostel Name"
+                            {...register("hostel")}
+                            className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                        />
+
+                    </div>
+
+                    {/* Phone */}
+
+                    <div>
+
+                        <label className="block font-semibold mb-2">
+
+                            📱 Phone Number
+
+                        </label>
+
+                        <input
+                            placeholder="Enter Phone Number"
+                            {...register("phone")}
+                            className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                        />
+
+                    </div>
+
+                    {/* Button */}
+
+                    <div className="md:col-span-2">
+
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold transition"
+                        >
+
+                            💾 {profileExists ? "Update Profile" : "Save Profile"}
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
 
         </MainLayout>
 

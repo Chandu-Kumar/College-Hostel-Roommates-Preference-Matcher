@@ -9,6 +9,8 @@ import {
     rejectRequest
 } from "../services/roomRequestService";
 
+import { toast } from "sonner";
+
 
 function RoomRequests() {
 
@@ -34,7 +36,9 @@ function RoomRequests() {
 
             console.error(error);
 
-            alert("Failed to Load Requests");
+            console.log("toast line reached");
+
+            toast.error("Failed to Load Requests");
 
         } finally {
 
@@ -56,7 +60,9 @@ function RoomRequests() {
 
             await acceptRequest(id);
 
-            alert("Request Accepted ✅");
+            console.log("toast line reached");
+
+            toast.success("Request Accepted ✅");
 
             loadRequests();
 
@@ -74,7 +80,9 @@ function RoomRequests() {
 
             await rejectRequest(id);
 
-            alert("Request Rejected ❌");
+            console.log("toast line reached");
+
+            toast.error("Request Rejected ❌");
 
             loadRequests();
 
@@ -91,29 +99,54 @@ function RoomRequests() {
 
         <div className="max-w-6xl mx-auto">
 
-            <h1 className="text-3xl font-bold mb-8">
-                📥 Room Requests
-            </h1>
+            <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-3xl p-8 shadow-xl mb-8">
+
+                <h1 className="text-4xl font-bold">
+
+                    📨 Room Requests
+
+                </h1>
+
+                <p className="mt-3 text-orange-100">
+
+                    Manage incoming roommate requests and track the requests you've sent.
+
+                </p>
+
+            </div>
 
             {loading ? (
 
-                <div className="text-center text-lg">
-                    Loading...
+                <div className="text-center py-16 text-lg text-gray-500">
+
+                    Loading your requests...
+
                 </div>
 
             ) : (
 
                 <>
+                <div className="grid lg:grid-cols-2 gap-8">
 
                     {/* Received */}
 
-                    <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                    <div className="bg-white rounded-3xl shadow-xl p-8 mb-8">
 
-                        <h2 className="text-2xl font-semibold mb-5">
+                        <div className="flex justify-between items-center mb-5">
 
-                            📥 Received Requests
+                            <h2 className="text-2xl font-bold">
 
-                        </h2>
+                                📥 Incoming Requests
+
+                            </h2>
+
+                            <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full font-semibold">
+
+                                {receivedRequests.length}
+
+                            </span>
+
+                        </div>
 
                         {
 
@@ -121,7 +154,21 @@ function RoomRequests() {
 
                                 <p className="text-gray-500">
 
-                                    No Received Requests
+                                    <div className="text-center py-10">
+
+                                        <div className="text-5xl">
+
+                                            📭
+
+                                        </div>
+
+                                        <p className="text-gray-500 mt-3">
+
+                                            No incoming requests yet.
+
+                                        </p>
+
+                                    </div>
 
                                 </p>
 
@@ -131,26 +178,72 @@ function RoomRequests() {
 
                                     <div
                                         key={request.id}
-                                        className="border rounded-xl p-4 mb-4 flex justify-between items-center"
+                                        className="border border-slate-200 rounded-2xl p-5 mb-4 flex justify-between items-center hover:shadow-lg transition"
                                     >
 
                                         <div>
 
                                             <p>
 
-                                                <strong>Sender ID:</strong>{" "}
+                                                <strong>👤 Sender ID :</strong>
 
                                                 {request.sender_id}
 
                                             </p>
 
-                                            <p>
+                                            <div>
 
-                                                <strong>Status:</strong>{" "}
+                                                <p className="mt-2">
 
-                                                {request.status}
+                                                    <span className="font-semibold">
 
-                                            </p>
+                                                        Status :
+
+                                                    </span>
+
+                                                    <span
+
+                                                        className={`
+
+                                                            ml-2
+
+                                                            px-3
+
+                                                            py-1
+
+                                                            rounded-full
+
+                                                            text-sm
+
+                                                            font-semibold
+
+                                                            ${
+
+                                                                request.status === "accepted"
+
+                                                                    ? "bg-green-100 text-green-700"
+
+                                                                    : request.status === "rejected"
+
+                                                                    ? "bg-red-100 text-red-700"
+
+                                                                    : "bg-yellow-100 text-yellow-700"
+
+                                                            }
+
+                                                        `}
+
+                                                    >
+
+                                                        {request.status === "accepted"? "🟢 Accepted": request.status === "rejected"? "🔴 Rejected": "🟡 Pending"}
+
+                                                    </span>
+
+                                                </p>
+
+                                                {/* {request.status} */}
+
+                                            </div>
 
                                         </div>
 
@@ -158,20 +251,20 @@ function RoomRequests() {
 
                                             request.status === "pending" && (
 
-                                                <div className="flex gap-3">
+                                                <div className="flex gap-4 w-full max-w-xs">
 
                                                     <button
                                                         onClick={() => handleAccept(request.id)}
-                                                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                                                        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl font-semibold transition"
                                                     >
-                                                        Accept
+                                                        ✅ Accept
                                                     </button>
 
                                                     <button
                                                         onClick={() => handleReject(request.id)}
-                                                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+                                                        className="flex-1 bg-rose-600 hover:bg-rose-700 text-white py-2 rounded-xl font-semibold transition"
                                                     >
-                                                        Reject
+                                                        ❌ Reject
                                                     </button>
 
                                                 </div>
@@ -192,13 +285,23 @@ function RoomRequests() {
 
                     {/* Sent */}
 
-                    <div className="bg-white rounded-2xl shadow-lg p-6">
+                    <div className="bg-white rounded-3xl shadow-xl p-8 mb-8">
 
-                        <h2 className="text-2xl font-semibold mb-5">
+                        <div className="flex justify-between items-center mb-5">
 
-                            📤 Sent Requests
+                            <h2 className="text-2xl font-bold">
 
-                        </h2>
+                                📤 Outgoing Requests
+
+                            </h2>
+
+                            <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold">
+
+                                {sentRequests.length}
+
+                            </span>
+
+                        </div>
 
                         {
 
@@ -206,7 +309,7 @@ function RoomRequests() {
 
                                 <p className="text-gray-500">
 
-                                    No Sent Requests
+                                    📤 You haven't sent any requests yet.
 
                                 </p>
 
@@ -216,26 +319,72 @@ function RoomRequests() {
 
                                     <div
                                         key={request.id}
-                                        className="border rounded-xl p-4 mb-4 flex justify-between items-center"
+                                        className="border border-slate-200 rounded-2xl p-5 mb-4 flex justify-between items-center hover:shadow-lg transition"
                                     >
 
                                         <div>
 
                                             <p>
 
-                                                <strong>Receiver ID:</strong>{" "}
+                                                <strong>👤 Receiver ID :</strong>
 
                                                 {request.receiver_id}
 
                                             </p>
 
-                                            <p>
+                                            <div>
 
-                                                <strong>Status:</strong>{" "}
+                                                <p className="mt-2">
 
-                                                {request.status}
+                                                    <span className="font-semibold">
 
-                                            </p>
+                                                        Status :
+
+                                                    </span>
+
+                                                    <span
+
+                                                        className={`
+
+                                                            ml-2
+
+                                                            px-3
+
+                                                            py-1
+
+                                                            rounded-full
+
+                                                            text-sm
+
+                                                            font-semibold
+
+                                                            ${
+
+                                                                request.status === "accepted"
+
+                                                                    ? "bg-green-100 text-green-700"
+
+                                                                    : request.status === "rejected"
+
+                                                                    ? "bg-red-100 text-red-700"
+
+                                                                    : "bg-yellow-100 text-yellow-700"
+
+                                                            }
+
+                                                        `}
+
+                                                    >
+
+                                                        {request.status.toUpperCase()}
+
+                                                    </span>
+
+                                                </p>
+
+                                                {/* {request.status} */}
+
+                                            </div>
 
                                         </div>
 
@@ -248,6 +397,7 @@ function RoomRequests() {
                         }
 
                     </div>
+                </div>
 
                 </>
 

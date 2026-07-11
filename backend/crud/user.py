@@ -8,6 +8,10 @@ from sqlalchemy.orm import joinedload
 from models.student_profile import StudentProfile
 
 
+from crud.preference import get_preference
+from crud.hobby import get_hobby_names
+
+
 def get_user_by_email(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
 
@@ -45,4 +49,36 @@ def get_all_students(
         .filter(User.id != current_user_id)
         .all()
     )
+
+
+
+def get_user_profile(
+    db: Session,
+    user_id: int
+):
+    user = (
+        db.query(User)
+        .options(joinedload(User.profile))
+        .filter(User.id == user_id)
+        .first()
+    )
+
+    if not user:
+        return None
+
+    preference = get_preference(db, user_id)
+
+    hobbies = get_hobby_names(db, user_id)
+
+    return {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email,
+
+        "profile": user.profile,
+
+        "preference": preference,
+
+        "hobbies": hobbies
+    }
 

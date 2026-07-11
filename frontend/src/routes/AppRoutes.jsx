@@ -19,6 +19,8 @@ import RoomRequests from "../pages/RoomRequests";
 
 import Register from "../pages/Register";
 
+import UserProfile from "../pages/UserProfile";;
+
 function AppRoutes() {
     return (
         <Routes>
@@ -85,6 +87,19 @@ function AppRoutes() {
             <Route
                 path="/register"
                 element={<Register />}
+            />
+
+            <Route
+                path="/users/:id"
+                element={<UserProfile />}
+            />
+            <Route
+                path="/users/:id"
+                element={
+                    <ProtectedRoute>
+                        <UserProfile />
+                    </ProtectedRoute>
+                }
             />
 
         </Routes>

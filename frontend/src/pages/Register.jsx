@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { registerUser } from "../services/registerService";
 
+import { toast } from "sonner";
+
 function Register() {
 
     const navigate = useNavigate();
@@ -31,7 +33,9 @@ function Register() {
 
         if (formData.password !== formData.confirmPassword) {
 
-            alert("Passwords do not match ❌");
+            console.log("toast line reached");
+
+            toast.error("Passwords do not match ❌");
 
             return;
 
@@ -47,7 +51,9 @@ function Register() {
                 password: formData.password,
             });
 
-            alert("Account Created Successfully ✅");
+            console.log("toast line reached");
+
+            toast.success("Account Created Successfully ✅");
 
             navigate("/");
 
@@ -55,7 +61,9 @@ function Register() {
 
             console.error(error);
 
-            alert(
+            console.log("toast line reached");
+
+            toast.error(
                 error.response?.data?.detail ||
                 "Registration Failed ❌"
             );

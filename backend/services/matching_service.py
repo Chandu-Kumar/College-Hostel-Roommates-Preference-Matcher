@@ -44,9 +44,25 @@ def find_matches(
     )
 
     my_hobbies = get_hobby_names(
-        db,
-        current_user.id
+    db,
+    current_user.id
     )
+
+    if my_preference is None:
+        from fastapi import HTTPException
+
+        raise HTTPException(
+            status_code=400,
+            detail="Complete your preferences before finding matches."
+        )
+
+    if len(my_hobbies) == 0:
+        from fastapi import HTTPException
+
+        raise HTTPException(
+            status_code=400,
+            detail="Please select your hobbies before finding matches."
+        )
 
     users = (
         db.query(User)
@@ -71,6 +87,9 @@ def find_matches(
             db,
             user.id
         )
+
+        if len(hobbies) == 0:
+            continue
 
         score = calculate_match_score(
             my_preference,

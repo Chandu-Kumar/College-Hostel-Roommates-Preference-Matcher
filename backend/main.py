@@ -16,9 +16,10 @@ from routes.room_request import router as room_request_router
 
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import matching
+# from routes import matching
 
-from routes import room_request
+# from routes import room_request
+from routes.user import router as user_router
 
 
 
@@ -46,9 +47,11 @@ app.include_router(matching_router)
 
 app.include_router(room_request_router)
 
-app.include_router(room_request.router)
+# app.include_router(room_request.router)
 
-app.include_router(matching.router)
+# app.include_router(matching.router)
+
+app.include_router(user_router)
 
 @app.get("/")
 def home():

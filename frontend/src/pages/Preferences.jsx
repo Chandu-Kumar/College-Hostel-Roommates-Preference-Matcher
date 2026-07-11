@@ -9,6 +9,12 @@ import {
   updatePreference,
 } from "../services/preferenceService";
 
+import { toast } from "sonner";
+
+import { useNavigate } from "react-router-dom";
+// import { toast } from "sonner";
+import { getProfile } from "../services/profileService";
+
 function Preferences() {
   const {
     register,
@@ -16,11 +22,36 @@ function Preferences() {
     setValue,
   } = useForm();
 
+  const navigate = useNavigate();
+
   const [preferenceExists, setPreferenceExists] = useState(false);
 
   useEffect(() => {
-    loadPreference();
+    checkAccess();
   }, []);
+
+  const checkAccess = async () => {
+      try {
+
+          console.log("checking profile....");
+
+          await getProfile();
+
+          console.log("profile exists");
+
+          loadPreference();
+
+      } catch( error) {
+          
+          console.log("profile does not exist");
+          console.log(error);
+
+          toast.warning("Please complete your profile first.");
+
+          navigate("/profile");
+
+      }
+  };
 
   const loadPreference = async () => {
     try {
@@ -56,13 +87,17 @@ function Preferences() {
 
         await updatePreference(data);
 
-        alert("Preferences Updated Successfully ✅");
+        // console.log("toast line reached");
+
+        toast.success("Preferences Updated Successfully");
 
       } else {
 
         await createPreference(data);
 
-        alert("Preferences Saved Successfully ✅");
+        // console.log("toast line reached");
+
+        toast.success("Preferences Saved Successfully");
 
         setPreferenceExists(true);
 
@@ -72,7 +107,9 @@ function Preferences() {
 
       console.error(err);
 
-      alert("Failed to Save Preferences ❌");
+      // console.log("toast line reached");
+
+      toast.error("Failed to Save Preferences ❌");
 
     }
   };
@@ -80,17 +117,27 @@ function Preferences() {
   return (
     <MainLayout>
 
+      <div className="bg-gradient-to-r from-indigo-600 to-blue-700 text-white rounded-3xl p-8 shadow-xl mb-8">
+
+          <h1 className="text-4xl font-bold">
+              🏠 Room Preferences
+          </h1>
+
+          <p className="mt-3 text-blue-100">
+              Configure your lifestyle and room preferences for better roommate matching.
+          </p>
+
+      </div>
+
       <div className="max-w-4xl mx-auto">
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white rounded-3xl shadow-xl p-10">
 
-          <h1 className="text-3xl font-bold mb-8 text-center">
-            🏠 Room Preferences
-          </h1>
+          
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-6"
+            className="grid md:grid-cols-2 gap-6"
           >
 
             {/* Sleep Time */}
@@ -98,13 +145,12 @@ function Preferences() {
             <div>
 
               <label className="block mb-2 font-semibold">
-                Sleep Time
+                  🌙 Sleep Time
               </label>
-
               <input
                 type="time"
                 {...register("sleep_time")}
-                className="w-full border rounded-lg p-3"
+                className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
               />
 
             </div>
@@ -114,13 +160,13 @@ function Preferences() {
             <div>
 
               <label className="block mb-2 font-semibold">
-                Wake Up Time
+                  ☀ Wake Up Time
               </label>
 
               <input
                 type="time"
                 {...register("wake_up_time")}
-                className="w-full border rounded-lg p-3"
+                className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
               />
 
             </div>
@@ -130,12 +176,12 @@ function Preferences() {
             <div>
 
               <label className="block mb-2 font-semibold">
-                Study Habit
+                  📚 Study Habit
               </label>
 
               <select
                 {...register("study_habit")}
-                className="w-full border rounded-lg p-3"
+                className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
               >
 
                 <option value="Morning">Morning</option>
@@ -151,12 +197,12 @@ function Preferences() {
             <div>
 
               <label className="block mb-2 font-semibold">
-                Cleanliness
+                  🧹 Cleanliness
               </label>
 
               <select
                 {...register("cleanliness")}
-                className="w-full border rounded-lg p-3"
+                className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
               >
 
                 <option value="High">High</option>
@@ -171,11 +217,11 @@ function Preferences() {
 
             <div>
 
-              <label className="block mb-3 font-semibold">
-                Lifestyle
+              <label className="block mb-3 font-semibold text-lg">
+                  🏠 Lifestyle
               </label>
 
-              <div className="space-y-3">
+              <div className="space-y-4 bg-slate-50 rounded-2xl p-5 border">
 
                 <label className="flex items-center gap-3">
 
@@ -219,12 +265,12 @@ function Preferences() {
             <div>
 
               <label className="block mb-2 font-semibold">
-                AC Preference
+                  ❄ AC Preference
               </label>
 
               <select
                 {...register("ac_preference")}
-                className="w-full border rounded-lg p-3"
+                className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
               >
 
                 <option value="AC">AC</option>
@@ -240,14 +286,14 @@ function Preferences() {
             <div>
 
               <label className="block mb-2 font-semibold">
-                Monthly Budget (₹)
+                  💰 Monthly Budget (₹)
               </label>
 
               <input
                 type="number"
                 placeholder="10000"
                 {...register("budget")}
-                className="w-full border rounded-lg p-3"
+                className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
               />
 
             </div>
@@ -257,12 +303,12 @@ function Preferences() {
             <div>
 
               <label className="block mb-2 font-semibold">
-                Food Preference
+                  🍽 Food Preference
               </label>
 
               <select
                 {...register("food_preference")}
-                className="w-full border rounded-lg p-3"
+                className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
               >
 
                 <option value="Veg">Veg</option>
@@ -278,12 +324,12 @@ function Preferences() {
             <div>
 
               <label className="block mb-2 font-semibold">
-                Personality
+                  😊 Personality
               </label>
 
               <select
                 {...register("personality")}
-                className="w-full border rounded-lg p-3"
+                className="w-full border rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition"
               >
 
                 <option value="Introvert">Introvert</option>
@@ -296,9 +342,10 @@ function Preferences() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+              className="md:col-span-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold transition"
             >
-              Save Preferences
+              
+              {preferenceExists ? "💾 Update Preferences": "💾 Save Preferences"}
             </button>
 
           </form>
