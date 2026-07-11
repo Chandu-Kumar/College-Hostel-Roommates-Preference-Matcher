@@ -1,84 +1,53 @@
 # 🏠 Hostel Matcher
 
-A Full Stack Hostel Roommate Matching Platform built using **React.js, FastAPI, SQLAlchemy, MySQL and Tailwind CSS**.
+> A Full Stack Roommate Matching Platform built using **React.js, FastAPI, MySQL and Tailwind CSS**.
 
-The application helps students find compatible hostel roommates based on lifestyle preferences, hobbies and personal information while maintaining privacy until both users agree.
+Find compatible hostel roommates based on **lifestyle preferences, hobbies and personal compatibility**, while keeping personal contact information private until both students connect.
 
 ---
 
-# ✨ Features
+## 🚀 Features
 
-## 🔐 Authentication
+### 🔐 Authentication
 
-- User Registration
-- Secure Login
-- JWT Authentication
+- JWT Login
+- Secure Registration
 - Protected Routes
 - Protected APIs
 
----
+### 👤 Student Profile
 
-## 👤 Student Profile
-
-- Create Profile
-- Update Profile
 - Personal Information
 - Department
 - Hostel
 - Academic Year
+- Phone Number
 
----
+### ⚙️ Lifestyle Preferences
 
-## ⚙ Preferences
-
-Students can set
-
-- Sleep Time
+- Sleep Schedule
 - Wake Up Time
 - Study Habit
 - Cleanliness
-- Smoking
-- Drinking
-- Guest Preference
-- AC Preference
-- Monthly Budget
 - Food Preference
+- AC Preference
 - Personality
+- Monthly Budget
+- Smoking & Drinking
+- Guest Preference
 
----
-
-## 🎯 Hobbies
+### 🎯 Hobbies
 
 - Multiple Hobby Selection
-- Update Hobbies
-- Dynamic Hobby Chips
+- Dynamic Hobby Management
 
----
+### ❤️ Smart Roommate Matching
 
-## ❤️ Matching Engine
+- Preference Matching
+- Hobby Matching
+- Compatibility Score
 
-Students are matched based on
-
-- Preferences
-- Common Hobbies
-
-The system calculates a compatibility score and shows the best matches first.
-
----
-
-## 👥 View Profile
-
-Users can view another student's
-
-- Personal Details
-- Preferences
-- Hobbies
-
-Phone Number and Email remain hidden until the room request is accepted.
-
----
-
-## 📨 Room Requests
+### 📨 Room Requests
 
 - Send Request
 - Accept Request
@@ -86,11 +55,11 @@ Phone Number and Email remain hidden until the room request is accepted.
 - Sent Requests
 - Received Requests
 
----
+### 🔒 Privacy Protection
 
-## 🔒 Privacy
-
-Contact information remains hidden until a room request has been accepted.
+- Phone Number Hidden
+- Email Hidden
+- Unlock Contact after Accepted Request
 
 ---
 
@@ -103,7 +72,7 @@ Contact information remains hidden until a room request has been accepted.
 - Tailwind CSS
 - Axios
 - React Hook Form
-- Sonner
+- Sonner Toast
 
 ## Backend
 
@@ -118,34 +87,54 @@ Contact information remains hidden until a room request has been accepted.
 
 ---
 
-# 📂 Project Structure
+# 📂 Folder Structure
 
-```
-frontend/
+```text
+Hostel-Matcher
 │
-├── src/
-│   ├── pages/
-│   ├── components/
-│   ├── services/
-│   ├── layouts/
-│   ├── routes/
-│   └── context/
+├── backend
+│   ├── config
+│   ├── crud
+│   ├── dependencies
+│   ├── matching
+│   ├── models
+│   ├── routes
+│   ├── schemas
+│   └── services
 │
-backend/
+├── frontend
+│   ├── api
+│   ├── components
+│   ├── context
+│   ├── layouts
+│   ├── pages
+│   ├── routes
+│   └── services
 │
-├── routes/
-├── crud/
-├── models/
-├── schemas/
-├── services/
-├── matching/
-├── dependencies/
-└── config/
+└── README.md
 ```
 
 ---
 
-# 🚀 Installation
+# 🖥 Screenshots
+
+> Add screenshots after deployment.
+
+| Login | Dashboard |
+|-------|-----------|
+| Screenshot | Screenshot |
+
+| Matches | View Profile |
+|----------|--------------|
+| Screenshot | Screenshot |
+
+| Room Requests | Preferences |
+|--------------|-------------|
+| Screenshot | Screenshot |
+
+---
+
+# ⚡ Installation
 
 ## Backend
 
@@ -155,12 +144,6 @@ cd backend
 pip install -r requirements.txt
 
 uvicorn main:app --reload
-```
-
-Backend runs at
-
-```
-http://localhost:8000
 ```
 
 ---
@@ -175,37 +158,32 @@ npm install
 npm run dev
 ```
 
-Frontend runs at
+---
 
-```
-http://localhost:5173
+# 🔑 Environment Variables
+
+Backend `.env`
+
+```env
+DATABASE_URL=your_database_url
+
+SECRET_KEY=your_secret_key
+
+ALGORITHM=HS256
+
+ACCESS_TOKEN_EXPIRE_MINUTES=60
 ```
 
 ---
 
-# 📸 Screenshots
+# 📌 Future Improvements
 
-Add screenshots here after deployment.
-
-Example
-
-- Login
-- Dashboard
-- Matches
-- Profile
-- View Profile
-- Room Requests
-
----
-
-# 🔮 Future Improvements
-
-- Real-time Chat
-- AI Roommate Recommendation
-- Email Verification
-- Push Notifications
-- Profile Pictures
-- Admin Dashboard
+- 💬 Real Time Chat
+- 🤖 AI Roommate Recommendation
+- 📧 Email Verification
+- 🔔 Notifications
+- 📷 Profile Picture Upload
+- 👨‍💼 Admin Dashboard
 
 ---
 
@@ -213,12 +191,10 @@ Example
 
 **Ravan**
 
-B.Tech CSE
+B.Tech Computer Science Engineering
 
 Lovely Professional University
 
 ---
 
-# 📜 License
-
-This project is developed for educational and portfolio purposes.
+⭐ If you like this project, consider giving it a star.
