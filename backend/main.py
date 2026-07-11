@@ -26,9 +26,15 @@ from routes.user import router as user_router
 
 app = FastAPI(title="Hostel Matcher API")
 
+
+origins = [
+    "http://localhost:5173",
+    "https://college-hostel-roommates-preference.vercel.app",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
