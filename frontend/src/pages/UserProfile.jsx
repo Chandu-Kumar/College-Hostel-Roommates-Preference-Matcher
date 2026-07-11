@@ -48,19 +48,63 @@ function UserProfile() {
 
                 <div className="bg-gradient-to-r from-indigo-600 to-blue-700 text-white rounded-3xl p-8 shadow-xl">
 
-                    <h1 className="text-4xl font-bold">
+                                        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
 
-                        👤 Student Profile
+                        <div className="flex items-center gap-6">
 
-                    </h1>
+                            <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-5xl font-bold border border-white/30">
 
-                    <p className="mt-2 text-blue-100">
+                                {loading ? "?" : user.name.charAt(0).toUpperCase()}
 
-                        {loading
-                            ? "Loading..."
-                            : `Viewing profile of ${user.name}`}
+                            </div>
 
-                    </p>
+                            <div>
+
+                                <h1 className="text-4xl font-bold">
+
+                                    {loading ? "Loading..." : user.name}
+
+                                </h1>
+
+                                <p className="mt-2 text-blue-100">
+
+                                    {loading
+                                        ? "Department"
+                                        : `${user.profile.department} • Year ${user.profile.year}`}
+
+                                </p>
+
+                                <p className="text-blue-200 mt-1">
+
+                                    🏠 {loading ? "--" : user.profile.hostel}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div className="mt-6 md:mt-0">
+
+                            <div className="bg-white/20 backdrop-blur px-6 py-4 rounded-2xl text-center">
+
+                                <p className="text-sm text-blue-100">
+
+                                    Student
+
+                                </p>
+
+                                <h2 className="text-3xl font-bold">
+
+                                    👨‍🎓
+
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -68,109 +112,72 @@ function UserProfile() {
 
                 <div className="bg-white rounded-3xl shadow-xl p-10 mt-8">
 
-                    <div className="flex items-center gap-6">
+                    <h2 className="text-2xl font-bold mb-8">
 
-                        <div className="w-24 h-24 rounded-full bg-blue-600 text-white flex items-center justify-center text-4xl font-bold">
+                        📋 Personal Information
 
-                            {loading
-                                ? "?"
-                                : user.name.charAt(0).toUpperCase()}
-
-                        </div>
-
-                        <div>
-
-                            <h2 className="text-3xl font-bold">
-
-                                {loading
-                                    ? "Loading..."
-                                    : user.name}
-
-                            </h2>
-
-                            <p className="text-gray-500">
-
-                                {loading
-                                    ? "Department"
-                                    : user.profile.department}
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <hr className="my-8" />
+                    </h2>
 
                     {/* Personal Details */}
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
 
-                        <div>
+                        <div className="bg-gray-50 rounded-2xl p-5">
 
-                            <h3 className="font-semibold">🎂 Age</h3>
+                            <p className="text-gray-500 text-sm">Age</p>
 
-                            <p>
+                            <h3 className="text-xl font-bold mt-2">
 
-                                {loading
-                                    ? "--"
-                                    : user.profile.age}
+                                🎂 {loading ? "--" : user.profile.age}
 
-                            </p>
+                            </h3>
 
                         </div>
 
-                        <div>
+                        <div className="bg-gray-50 rounded-2xl p-5">
 
-                            <h3 className="font-semibold">👥 Gender</h3>
+                            <p className="text-gray-500 text-sm">Gender</p>
 
-                            <p>
+                            <h3 className="text-xl font-bold mt-2">
 
-                                {loading
-                                    ? "--"
-                                    : user.profile.gender}
+                                👤 {loading ? "--" : user.profile.gender}
 
-                            </p>
+                            </h3>
 
                         </div>
 
-                        <div>
+                        <div className="bg-gray-50 rounded-2xl p-5">
 
-                            <h3 className="font-semibold">🏠 Hostel</h3>
+                            <p className="text-gray-500 text-sm">Hostel</p>
 
-                            <p>
+                            <h3 className="text-xl font-bold mt-2">
 
-                                {loading
-                                    ? "--"
-                                    : user.profile.hostel}
+                                🏠 {loading ? "--" : user.profile.hostel}
 
-                            </p>
+                            </h3>
 
                         </div>
 
-                        <div>
+                        <div className="bg-gray-50 rounded-2xl p-5">
 
-                            <h3 className="font-semibold">📚 Year</h3>
+                            <p className="text-gray-500 text-sm">Academic Year</p>
 
-                            <p>
+                            <h3 className="text-xl font-bold mt-2">
 
-                                {loading
-                                    ? "--"
-                                    : user.profile.year}
+                                📚 {loading ? "--" : user.profile.year}
 
-                            </p>
+                            </h3>
 
                         </div>
 
                     </div>
-
                     <hr className="my-8" />
 
                     {/* Preferences */}
 
-                    <h3 className="text-2xl font-bold mb-5">
+                    <h3 className="text-2xl font-bold mb-6">
 
-                        ⚙️ Preferences
+                        ⚙ Lifestyle Preferences
 
                     </h3>
 
@@ -184,73 +191,132 @@ function UserProfile() {
 
                         :
 
-                        <div className="grid md:grid-cols-2 gap-5">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                            <div className="bg-blue-50 rounded-2xl p-5">
 
-                            <div>
+                                <p className="text-sm text-gray-500">
 
-                                <strong>🌙 Sleep</strong>
+                                    Sleep
 
-                                <p>{user.preference.sleep_time}</p>
+                                </p>
 
-                            </div>
+                                <h3 className="font-bold text-lg mt-2">
 
-                            <div>
+                                    🌙 {user.preference.sleep_time}
 
-                                <strong>☀️ Wake Up</strong>
-
-                                <p>{user.preference.wake_up_time}</p>
-
-                            </div>
-
-                            <div>
-
-                                <strong>📚 Study Habit</strong>
-
-                                <p>{user.preference.study_habit}</p>
+                                </h3>
 
                             </div>
 
-                            <div>
+                            <div className="bg-blue-50 rounded-2xl p-5">
 
-                                <strong>🧹 Cleanliness</strong>
+                                <p className="text-sm text-gray-500">
 
-                                <p>{user.preference.cleanliness}</p>
+                                    Wake Up
 
-                            </div>
+                                </p>
 
-                            <div>
+                                <h3 className="font-bold text-lg mt-2">
 
-                                <strong>🍛 Food</strong>
+                                    ☀️ {user.preference.wake_up_time}
 
-                                <p>{user.preference.food_preference}</p>
-
-                            </div>
-
-                            <div>
-
-                                <strong>🎭 Personality</strong>
-
-                                <p>{user.preference.personality}</p>
+                                </h3>
 
                             </div>
 
-                            <div>
+                            <div className="bg-blue-50 rounded-2xl p-5">
 
-                                <strong>❄ AC</strong>
+                                <p className="text-sm text-gray-500">
 
-                                <p>{user.preference.ac_preference}</p>
+                                    Study Habit
+
+                                </p>
+
+                                <h3 className="font-bold text-lg mt-2">
+
+                                    📚 {user.preference.study_habit}
+
+                                </h3>
 
                             </div>
 
-                            <div>
+                            <div className="bg-blue-50 rounded-2xl p-5">
 
-                                <strong>💰 Budget</strong>
+                                <p className="text-sm text-gray-500">
 
-                                <p>
+                                    Cleanliness
+
+                                </p>
+
+                                <h3 className="font-bold text-lg mt-2">
+
+                                    🧹 {user.preference.cleanliness}
+
+                                </h3>
+
+                            </div>
+
+                            <div className="bg-blue-50 rounded-2xl p-5">
+
+                                <p className="text-sm text-gray-500">
+
+                                    Food
+
+                                </p>
+
+                                <h3 className="font-bold text-lg mt-2">
+
+                                    🍛 {user.preference.food_preference}
+
+                                </h3>
+
+                            </div>
+
+                            <div className="bg-blue-50 rounded-2xl p-5">
+
+                                <p className="text-sm text-gray-500">
+
+                                    Personality
+
+                                </p>
+
+                                <h3 className="font-bold text-lg mt-2">
+
+                                    🎭 {user.preference.personality}
+
+                                </h3>
+
+                            </div>
+
+                            <div className="bg-blue-50 rounded-2xl p-5">
+
+                                <p className="text-sm text-gray-500">
+
+                                    AC
+
+                                </p>
+
+                                <h3 className="font-bold text-lg mt-2">
+
+                                    ❄ {user.preference.ac_preference}
+
+                                </h3>
+
+                            </div>
+
+                            <div className="bg-blue-50 rounded-2xl p-5">
+
+                                <p className="text-sm text-gray-500">
+
+                                    Budget
+
+                                </p>
+
+                                <h3 className="font-bold text-lg mt-2">
 
                                     ₹ {user.preference.budget}
 
-                                </p>
+                                </h3>
 
                             </div>
 
@@ -288,7 +354,7 @@ function UserProfile() {
 
                                 <span
                                     key={hobby}
-                                    className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-medium"
+                                    className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md hover:scale-105 transition text-blue-700 px-4 py-2 rounded-full font-medium"
                                 >
 
                                     {hobby}
@@ -311,38 +377,56 @@ function UserProfile() {
 
                     </h3>
 
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-5">
+                    <div className="rounded-3xl border-2 border-dashed border-gray-300 bg-gray-50 p-8 text-center">
 
-                        <p className="font-semibold">
+                        <div className="text-5xl">
 
-                            📧 Email
-
-                        </p>
-
-                        <p className="text-gray-500">
-
-                            🔒 Hidden until room request is accepted
-
-                        </p>
-
-                        <div className="mt-5">
-
-                            <p className="font-semibold">
-
-                                📱 Phone
-
-                            </p>
-
-                            <p className="text-gray-500">
-
-                                🔒 Hidden until room request is accepted
-
-                            </p>
+                            🔒
 
                         </div>
 
-                    </div>
+                        <h2 className="text-2xl font-bold mt-4">
 
+                            Contact Information Locked
+
+                        </h2>
+
+                        <p className="text-gray-700 mt-2">
+
+                            {
+
+                                user?.email
+
+                                ?
+
+                                user.email
+
+                                :
+
+                                "📧 Hidden until room request is accepted"
+
+                            }
+
+                        </p>
+                        <p className="text-gray-700 mt-2">
+
+                            {
+
+                                user?.phone
+
+                                ?
+
+                                user.phone
+
+                                :
+
+                                "📱 Hidden until room request is accepted"
+
+                            }
+
+                        </p>
+
+                    </div>
                 </div>
 
             </div>

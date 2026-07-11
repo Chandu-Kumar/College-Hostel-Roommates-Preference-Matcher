@@ -11,6 +11,7 @@ from models.student_profile import StudentProfile
 from crud.preference import get_preference
 from crud.hobby import get_hobby_names
 
+from crud.room_request import get_accepted_request
 
 def get_user_by_email(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
@@ -54,6 +55,7 @@ def get_all_students(
 
 def get_user_profile(
     db: Session,
+    current_user_id: int,
     user_id: int
 ):
     user = (
@@ -70,10 +72,26 @@ def get_user_profile(
 
     hobbies = get_hobby_names(db, user_id)
 
+    accepted_request = get_accepted_request(
+        db,
+        current_user_id,
+        user_id
+    )
+
+    email = None
+    phone = None
+
+    if accepted_request:
+        email = user.email
+        phone = user.profile.phone if user.profile else None
+
     return {
         "id": user.id,
         "name": user.name,
-        "email": user.email,
+
+        "email": email,
+
+        "phone": phone,
 
         "profile": user.profile,
 

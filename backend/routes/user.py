@@ -27,6 +27,7 @@ def get_public_user_profile(
 
     user = get_user_profile(
         db,
+        current_user.id,
         user_id
     )
 

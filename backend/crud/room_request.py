@@ -79,4 +79,27 @@ def update_request_status(
     return request
 
 
+def get_accepted_request(
+    db: Session,
+    user1_id: int,
+    user2_id: int
+):
+    return (
+        db.query(RoomRequest)
+        .filter(
+            (
+                (RoomRequest.sender_id == user1_id) &
+                (RoomRequest.receiver_id == user2_id)
+            )
+            |
+            (
+                (RoomRequest.sender_id == user2_id) &
+                (RoomRequest.receiver_id == user1_id)
+            ),
+            RoomRequest.status == "accepted"
+        )
+        .first()
+    )
+
+
 
