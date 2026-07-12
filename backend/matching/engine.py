@@ -24,4 +24,4 @@ def calculate_match_score(
 
     total_score = preference_score + hobby_marks
 
-    return round(total_score, 2)
+    return round(min(total_score,100), 2)
